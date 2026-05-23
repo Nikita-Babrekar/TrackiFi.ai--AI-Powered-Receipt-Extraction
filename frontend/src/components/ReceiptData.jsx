@@ -38,7 +38,7 @@ const ReceiptData = ({ data, onCancel, onSaveSuccess }) => {
     e.preventDefault();
     setIsSaving(true);
     try {
-      const response = await fetch('http://trackifiai-ai-powered-receipt-extraction-production.up.railway.app/api/expenses', {
+      const response = await fetch('https://trackifiai-ai-powered-receipt-extraction-production.up.railway.app/api/expenses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
