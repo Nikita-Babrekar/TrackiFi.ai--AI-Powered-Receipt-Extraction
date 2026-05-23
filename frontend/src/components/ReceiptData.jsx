@@ -38,12 +38,12 @@ const ReceiptData = ({ data, onCancel, onSaveSuccess }) => {
     e.preventDefault();
     setIsSaving(true);
     try {
-      const response = await fetch('http://localhost:5000/api/expenses', {
+      const response = await fetch('http://trackifiai-ai-powered-receipt-extraction-production.up.railway.app/api/expenses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      
+
       if (response.ok) {
         if (onSaveSuccess) onSaveSuccess();
       } else {
@@ -64,12 +64,12 @@ const ReceiptData = ({ data, onCancel, onSaveSuccess }) => {
     <div className="data-card fade-in glass-panel">
       <div className="form-group">
         <label htmlFor="merchant_name">Merchant Name</label>
-        <input 
-          type="text" 
+        <input
+          type="text"
           id="merchant_name"
-          name="merchant_name" 
-          value={formData.merchant_name} 
-          onChange={handleChange} 
+          name="merchant_name"
+          value={formData.merchant_name}
+          onChange={handleChange}
           className="glass-input"
         />
       </div>
@@ -77,24 +77,24 @@ const ReceiptData = ({ data, onCancel, onSaveSuccess }) => {
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="date">Date</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             id="date"
-            name="date" 
-            value={formData.date} 
-            onChange={handleChange} 
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
             className="glass-input"
           />
         </div>
 
         <div className="form-group">
           <label htmlFor="category">Category</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             id="category"
-            name="category" 
-            value={formData.category} 
-            onChange={handleChange} 
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
             className="glass-input"
           />
         </div>
@@ -103,24 +103,24 @@ const ReceiptData = ({ data, onCancel, onSaveSuccess }) => {
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="payment_mode">Payment Mode</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             id="payment_mode"
-            name="payment_mode" 
-            value={formData.payment_mode} 
-            onChange={handleChange} 
+            name="payment_mode"
+            value={formData.payment_mode}
+            onChange={handleChange}
             className="glass-input"
           />
         </div>
 
         <div className="form-group">
           <label htmlFor="currency">Currency</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             id="currency"
-            name="currency" 
-            value={formData.currency} 
-            onChange={handleChange} 
+            name="currency"
+            value={formData.currency}
+            onChange={handleChange}
             className="glass-input"
           />
         </div>
@@ -129,26 +129,26 @@ const ReceiptData = ({ data, onCancel, onSaveSuccess }) => {
       <div className="form-row">
         <div className="form-group amount-group">
           <label htmlFor="tax_amount">Tax Amount</label>
-          <input 
-            type="number" 
+          <input
+            type="number"
             step="0.01"
             id="tax_amount"
-            name="tax_amount" 
-            value={formData.tax_amount} 
-            onChange={handleChange} 
+            name="tax_amount"
+            value={formData.tax_amount}
+            onChange={handleChange}
             className="glass-input highlight-input secondary-highlight"
           />
         </div>
 
         <div className="form-group amount-group">
           <label htmlFor="total_amount">Total Amount</label>
-          <input 
-            type="number" 
+          <input
+            type="number"
             step="0.01"
             id="total_amount"
-            name="total_amount" 
-            value={formData.total_amount} 
-            onChange={handleChange} 
+            name="total_amount"
+            value={formData.total_amount}
+            onChange={handleChange}
             className="glass-input highlight-input"
           />
         </div>

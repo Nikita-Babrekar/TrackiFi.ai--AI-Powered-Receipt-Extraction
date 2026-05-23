@@ -17,7 +17,7 @@ const ReceiptUploader = ({ onUploadStart, onUploadSuccess, onUploadError }) => {
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
-    
+
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0];
       processFile(file);
@@ -43,7 +43,7 @@ const ReceiptUploader = ({ onUploadStart, onUploadSuccess, onUploadError }) => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:5000/api/upload', {
+      const response = await fetch('http://trackifiai-ai-powered-receipt-extraction-production.up.railway.app/api/upload', {
         method: 'POST',
         body: formData,
       });
@@ -66,21 +66,21 @@ const ReceiptUploader = ({ onUploadStart, onUploadSuccess, onUploadError }) => {
 
   return (
     <div className="uploader-container">
-      <div 
+      <div
         className={`drop-zone glass-panel ${isDragging ? 'dragging' : ''}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current.click()}
       >
-        <input 
-          type="file" 
-          ref={fileInputRef} 
-          onChange={handleFileChange} 
-          accept="image/png, image/jpeg" 
-          style={{ display: 'none' }} 
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept="image/png, image/jpeg"
+          style={{ display: 'none' }}
         />
-        
+
         <div className="upload-prompt">
           <div className="upload-icon-wrapper">
             <svg className="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

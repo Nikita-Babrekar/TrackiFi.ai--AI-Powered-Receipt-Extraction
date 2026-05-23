@@ -25,4 +25,4 @@ This is a lightweight Python Flask backend that uses the `google-genai` SDK and 
    ```bash
    python app.py
    ```
-   The backend will be running at `http://localhost:5000`.
+   The backend will be running at `http://trackifiai-ai-powered-receipt-extraction-production.up.railway.app`.

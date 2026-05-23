@@ -17,4 +17,4 @@ This is a modern React frontend built with Vite. It features a drag-and-drop fil
 3. **Open your browser:**
    Navigate to `http://localhost:5173` (or the URL shown in your terminal).
 
-Ensure the Python Flask backend is running on `http://localhost:5000` to handle file uploads.
+Ensure the Python Flask backend is running on `http://trackifiai-ai-powered-receipt-extraction-production.up.railway.app` to handle file uploads.
