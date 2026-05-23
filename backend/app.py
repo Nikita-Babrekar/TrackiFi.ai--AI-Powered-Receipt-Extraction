@@ -393,6 +393,14 @@ def delete_expense(expense_id):
         print(f"Error deleting expense: {str(e)}")
         return jsonify({"error": "Failed to delete expense"}), 500
 
+# if __name__ == '__main__':
+#     # Run the server on port 5000 for local development
+#     app.run(debug=True, port=5000)
+
+
 if __name__ == '__main__':
-    # Run the server on port 5000 for local development
-    app.run(debug=True, port=5000)
+    import os
+    # Railway provides the port dynamically via environment variables
+    port = int(os.environ.get("PORT", 5000))
+    # Setting host to 0.0.0.0 tells Flask to listen to all public cloud requests
+    app.run(host='0.0.0.0', port=port)
