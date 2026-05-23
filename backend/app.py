@@ -192,6 +192,7 @@ import os
 import time  # For handling retry delays during server spikes
 import io
 import psycopg2
+from flask_cors import CORS
 from psycopg2.extras import RealDictCursor
 from flask import Flask, request, jsonify
 from flask_cors import CORS
