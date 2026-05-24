@@ -197,6 +197,19 @@ def delete_expense(expense_id):
     except Exception as e:
         return jsonify({"error": f"Database interaction profile delete crash error details: {str(e)}"}), 500
 
+
+@app.errorhandler(Exception)
+def handle_global_runtime_error(error):
+    """Intercepts deep server errors and returns the explicit text tracing payload to the UI."""
+    print(f"CRITICAL OVERRIDE CAPTURED: {str(error)}")
+    response = jsonify({
+        "success": False, 
+        "error": "Internal Application Processing Failure",
+        "details": str(error)
+    })
+    response.status_code = 500
+    return response
+    
 # Safe Isolated Initialization Block executed exclusively by local runtime systems or container clusters
 if __name__ == '__main__':
     init_db()
