@@ -4,8 +4,8 @@ import ReceiptData from './components/ReceiptData';
 import AnalyticsPanel from './components/AnalyticsPanel';
 import './index.css';
 
-// Central Live API Base URL from Railway
-const API_BASE_URL = 'https://trackifiai-ai-powered-receipt-extraction-production.up.railway.app';
+// Central Local API Base URL
+const API_BASE_URL = 'http://127.0.0.1:8080';
 
 function App() {
   const [receiptData, setReceiptData] = useState(null);

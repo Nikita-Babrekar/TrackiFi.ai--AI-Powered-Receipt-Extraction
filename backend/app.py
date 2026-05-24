@@ -9,12 +9,12 @@ from google import genai
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
-# 1. Load context environment variable wrappers
+# Load local environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
 
-# 2. Complete Global Overwrite for Production CORS Handshakes
+# Complete Global Overwrite for Production/Local CORS Handshakes
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 @app.before_request
@@ -35,7 +35,7 @@ def add_cors_headers(response):
     response.headers.add("Access-Control-Allow-Credentials", "true")
     return response
 
-# 3. Model Engine Schema Profiles Matching Your Vercel Frontend UI Context Keys
+# Model Engine Schema Profiles Matching UI Context Keys
 class ReceiptData(BaseModel):
     merchant_name: str = Field(description="The name of the store, restaurant, or vendor.")
     date: str = Field(description="The transaction date found on the receipt formatted as YYYY-MM-DD. Use null if not found.")
@@ -45,11 +45,11 @@ class ReceiptData(BaseModel):
     tax_amount: float = Field(description="The total tax amount charged. Return 0.0 if not specified.")
     payment_mode: str = Field(description="The method of payment used, strictly categorized as one of these: 'UPI', 'Cash', 'Card', or 'Not Specified'.")
 
-# 4. Isolated Helper Functions (Preventing Boot Failures)
+# Database Connection Helper Function
 def get_db_connection():
     database_url = os.getenv("DATABASE_URL")
     if not database_url:
-        raise ValueError("CRITICAL: DATABASE_URL variable is missing from the environment configuration dashboard context.")
+        raise ValueError("CRITICAL: DATABASE_URL variable is missing from your local .env configuration file.")
     return psycopg2.connect(database_url)
 
 def init_db():
@@ -77,13 +77,12 @@ def init_db():
     except Exception as e:
         print(f"Database initialization error during initialization phase: {e}")
 
-# 5. Application Routing Implementations
+# Application Routing Implementations
 @app.route('/api/upload', methods=['POST'])
 def upload_receipt():
-    # Dynamic instantiation execution pathing matching SDK configurations
     gemini_key = os.getenv("GEMINI_API_KEY")
     if not gemini_key:
-        return jsonify({"error": "Gemini API key is completely missing from runtime environments."}), 500
+        return jsonify({"error": "Gemini API key is completely missing from local environments."}), 500
 
     if 'file' not in request.files:
         return jsonify({"error": "No file stream payload included inside multipart format boundary profiles."}), 400
@@ -99,7 +98,6 @@ def upload_receipt():
 
         prompt = "Analyze this receipt image. Extract the vendor name, date, total amount, categorize the expense, identify the currency, extract the tax amount, and determine the payment mode."
         
-        # Initialize isolated generation client within current scope wrapper framework
         client = genai.Client(api_key=gemini_key)
         
         max_retries = 3
@@ -197,10 +195,8 @@ def delete_expense(expense_id):
     except Exception as e:
         return jsonify({"error": f"Database interaction profile delete crash error details: {str(e)}"}), 500
 
-
 @app.errorhandler(Exception)
 def handle_global_runtime_error(error):
-    """Intercepts deep server errors and returns the explicit text tracing payload to the UI."""
     print(f"CRITICAL OVERRIDE CAPTURED: {str(error)}")
     response = jsonify({
         "success": False, 
@@ -212,6 +208,5 @@ def handle_global_runtime_error(error):
 
 if __name__ == '__main__':
     init_db()
-    # Forces the app to accept Railway's dynamic port, defaulting to 8080 only locally
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    # Runs locally directly on port 8080 with interactive debugger enabled
+    app.run(host='127.0.0.1', port=8080, debug=True)

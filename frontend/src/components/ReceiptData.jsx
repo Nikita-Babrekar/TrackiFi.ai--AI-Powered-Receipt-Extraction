@@ -38,7 +38,7 @@ const ReceiptData = ({ data, onCancel, onSaveSuccess }) => {
     e.preventDefault();
     setIsSaving(true);
     try {
-      const response = await fetch('https://trackifiai-ai-powered-receipt-extraction-production.up.railway.app/api/expenses', {
+      const response = await fetch('http://127.0.0.1:8080/api/expenses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -136,7 +136,7 @@ const ReceiptData = ({ data, onCancel, onSaveSuccess }) => {
             name="tax_amount"
             value={formData.tax_amount}
             onChange={handleChange}
-            className="glass-input highlight-input secondary-highlight"
+            className="glass-input highlight-input migratory-highlight"
           />
         </div>
 

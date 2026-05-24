@@ -43,7 +43,7 @@ const ReceiptUploader = ({ onUploadStart, onUploadSuccess, onUploadError }) => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('https://trackifiai-ai-powered-receipt-extraction-production.up.railway.app/api/upload', {
+      const response = await fetch('http://127.0.0.1:8080/api/upload', {
         method: 'POST',
         body: formData,
       });
