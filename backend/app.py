@@ -209,9 +209,9 @@ def handle_global_runtime_error(error):
     })
     response.status_code = 500
     return response
-    
-# Safe Isolated Initialization Block executed exclusively by local runtime systems or container clusters
+
 if __name__ == '__main__':
     init_db()
+    # Forces the app to accept Railway's dynamic port, defaulting to 8080 only locally
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port, debug=False)
