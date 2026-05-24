@@ -5,7 +5,6 @@ import psycopg2
 from flask_cors import CORS
 from psycopg2.extras import RealDictCursor
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 from google import genai
 from pydantic import BaseModel, Field
 from PIL import Image
@@ -15,8 +14,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-# Enable CORS so your React frontend can securely make API calls to this backend
-CORS(app)
+
+# Make sure it explicitly supports credentials and all resources
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
 
 # Fetch the Supabase Connection URI string from your hidden .env file
 DATABASE_URL = os.getenv("DATABASE_URL")
