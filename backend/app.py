@@ -473,6 +473,11 @@ def delete_expense(expense_id):
 # ==========================================
 # ⚡ ENTRYPOINT INTERFACE
 # ==========================================
+# Change this line near the top of your file:
+# init_db() 
+
+# Replace it with a safe dynamic call inside the entry point down at the bottom:
 if __name__ == '__main__':
+    init_db()  # Initializes safely right as the network socket opens
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port, debug=False)
